@@ -23,9 +23,14 @@ export default async function ProductDetails(props: any) {
 
   let product;
 
-  if (productId) {
-    product = await ProductService.getProductById(productId);
+ if (productId) {
+  try {
+    product = await ProductService.getProductById(Number(productId));
+  } catch (error) {
+    console.error(error);
+    return <div>Error loading product</div>;
   }
+}
 
   if (!product) {
     return <div>Product not found</div>;
