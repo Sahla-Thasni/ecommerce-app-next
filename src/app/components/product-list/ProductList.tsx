@@ -28,7 +28,7 @@ export default function ProductList() {
   }, []);
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <h2  style={{ color: "red" }}>Loading...</h2>;
   }
 
   if (error) {
