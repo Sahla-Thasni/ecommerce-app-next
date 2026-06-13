@@ -1,7 +1,7 @@
 "use client";
 import AddToCartButton from "@/app/components/cart-button/AddToCartButton";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function ProductCard(props: any) {
@@ -10,9 +10,7 @@ export default function ProductCard(props: any) {
   const selectedProd = () => {
     setSelectedProduct(prod);
   };
-  // useEffect(() => {
-  //   fetch("https://fakestoreapi.com/products/1");
-  // }, []);
+
   const router = useRouter();
 
   function removeFromCart(id: number) {
