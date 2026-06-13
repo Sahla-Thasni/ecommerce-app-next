@@ -1,6 +1,7 @@
 
 "use client";
 
+import { use } from "react";
 import { useEffect, useState } from "react";
 import { ProductService } from "@/app/services/product-service";
 import AddToCartButton from "@/app/components/cart-button/AddToCartButton";
@@ -8,30 +9,30 @@ import AddToCartButton from "@/app/components/cart-button/AddToCartButton";
 export default function ProductDetails({
   params,
 }: {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }) {
+  const { productId } = use(params);
+
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  console.log("params =", params);
-  console.log("productId =", params.productId);
-
-  ProductService.getProductById(Number(params.productId))
-    .then((data) => {
-      console.log("product =", data);
-      setProduct(data);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.error(err);
-      setLoading(false);
-    });
-}, [params]);
+    ProductService.getProductById(Number(productId))
+      .then((data) => {
+        setProduct(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [productId]);
 
   if (loading) return <h2>Loading...</h2>;
 
   if (!product) return <div>Product not found</div>;
+
+
   return (
     <div className="container py-5">
       <div className="row">
