@@ -2,9 +2,9 @@ import AddToCartButton from "@/app/components/cart-button/AddToCartButton";
 import { ProductService } from "@/app/services/product-service";
 
 export async function generateMetadata(props: any) {
-  console.log("generateMetadata props:", props);
+
   const params = await props.params;
-  const productId = params.productId;
+  const { productId } = await params;
   var product;
   if (productId) {
     product = await ProductService.getProductById(productId);
@@ -18,9 +18,10 @@ export async function generateMetadata(props: any) {
   };
 }
 export default async function ProductDetails(props: any) {
-  console.log("props:", props);
+ 
   const params = await props.params;
-  const productId = params.productId;
+  // const productId = params.productId;
+  const { productId } = await params;
   var product;
   if (productId) {
     product = await ProductService.getProductById(productId);

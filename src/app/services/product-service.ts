@@ -14,4 +14,6 @@ export class ProductService extends ServiceBase {
     var product = await productResponse.json();
     return product;
   };
+
 }
+
