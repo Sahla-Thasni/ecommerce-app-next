@@ -14,16 +14,20 @@ export default function ProductDetails({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    ProductService.getProductById(Number(params.productId))
-      .then((data) => {
-        setProduct(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, [params.productId]);
+  console.log("params =", params);
+  console.log("productId =", params.productId);
+
+  ProductService.getProductById(Number(params.productId))
+    .then((data) => {
+      console.log("product =", data);
+      setProduct(data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error(err);
+      setLoading(false);
+    });
+}, [params]);
 
   if (loading) return <h2>Loading...</h2>;
 
