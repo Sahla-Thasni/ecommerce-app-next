@@ -1,41 +1,33 @@
-import AddToCartButton from "@/app/components/cart-button/AddToCartButton";
+
+"use client";
+
+import { useEffect, useState } from "react";
 import { ProductService } from "@/app/services/product-service";
+import AddToCartButton from "@/app/components/cart-button/AddToCartButton";
 
-export async function generateMetadata(props: any) {
-  const params = await props.params;
-  const { productId } = await params;
-  var product;
-  if (productId) {
-    product = await ProductService.getProductById(productId);
+export default function ProductDetails({
+  params,
+}: {
+  params: { productId: string };
+}) {
+  const [product, setProduct] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-    return {
-      title: product.title,
-    };
-  }
-  return {
-    title: "Product Details",
-  };
-}
+  useEffect(() => {
+    ProductService.getProductById(Number(params.productId))
+      .then((data) => {
+        setProduct(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [params.productId]);
 
-export default async function ProductDetails(props: any) {
-  const params = await props.params;
-  const { productId } = await params;
+  if (loading) return <h2>Loading...</h2>;
 
-  let product;
-
- if (productId) {
-  try {
-    product = await ProductService.getProductById(Number(productId));
-  } catch (error) {
-    console.error(error);
-    return <div>Error loading product</div>;
-  }
-}
-
-  if (!product) {
-    return <div>Product not found</div>;
-  }
-
+  if (!product) return <div>Product not found</div>;
   return (
     <div className="container py-5">
       <div className="row">
