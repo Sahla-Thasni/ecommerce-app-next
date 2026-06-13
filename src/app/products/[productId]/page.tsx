@@ -2,7 +2,6 @@ import AddToCartButton from "@/app/components/cart-button/AddToCartButton";
 import { ProductService } from "@/app/services/product-service";
 
 export async function generateMetadata(props: any) {
-
   const params = await props.params;
   const { productId } = await params;
   var product;
@@ -17,14 +16,19 @@ export async function generateMetadata(props: any) {
     title: "Product Details",
   };
 }
+
 export default async function ProductDetails(props: any) {
- 
   const params = await props.params;
-  // const productId = params.productId;
   const { productId } = await params;
-  var product;
+
+  let product;
+
   if (productId) {
     product = await ProductService.getProductById(productId);
+  }
+
+  if (!product) {
+    return <div>Product not found</div>;
   }
 
   return (
