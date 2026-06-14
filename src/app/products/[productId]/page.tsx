@@ -1,10 +1,11 @@
 
 "use client";
-
+import AddToCartButton from "@/app/components/cart-button/AddToCartButton";
+import { ProductService } from "@/app/services/product-service";
 import { use } from "react";
 import { useEffect, useState } from "react";
-import { ProductService } from "@/app/services/product-service";
-import AddToCartButton from "@/app/components/cart-button/AddToCartButton";
+
+
 
 export default function ProductDetails({
   params,

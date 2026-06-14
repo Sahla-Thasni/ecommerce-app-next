@@ -1,9 +1,10 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+
 import ProductCard from "../product-card/ProductCard";
 import { ProductService } from "@/app/services/product-service";
+import { useEffect, useState } from "react";
 
 export default function ProductList() {
   const [products, setProducts] = useState<any[]>([]);

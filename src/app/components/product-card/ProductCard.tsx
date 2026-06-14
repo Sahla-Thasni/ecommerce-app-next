@@ -25,7 +25,6 @@ export default function ProductCard(props: any) {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Product deleted from cart!");
     location.reload();
   }
 

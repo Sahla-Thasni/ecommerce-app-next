@@ -19,7 +19,6 @@ export default function AddToCartButton({ product }: any) {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Product added to cart!");
     router.push("/cart");
   }
   return (
